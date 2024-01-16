@@ -1,8 +1,9 @@
-import {View, Text, StyleSheet} from 'react-native'
+import {View, Text, ScrollView, StyleSheet} from 'react-native'
 
 import Header from '../../components/Header'
 import MemoListItem from '../../components/MemoListItem'
 import CircleButton from '../../components/CircleButton'
+import Icon from '../../components/icon'
 
 const Index = (): JSX.Element =>{
     return(
@@ -10,7 +11,7 @@ const Index = (): JSX.Element =>{
 
             <Header />
 
-            <View>
+            <ScrollView>
 
                 <MemoListItem />
 
@@ -18,9 +19,11 @@ const Index = (): JSX.Element =>{
 
                 <MemoListItem />
 
-            </View>
+            </ScrollView>
 
-            <CircleButton>+</CircleButton>
+            <CircleButton>
+                <Icon name='plus' size={40} color='#ffffff'/>
+            </CircleButton>
 
         </View>
 
