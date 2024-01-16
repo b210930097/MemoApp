@@ -13,30 +13,30 @@ const Index = (): JSX.Element =>{
 
             <View>
 
-                <View>
+                <View style = {styles.memoListItem}>
                     <View>
-                        <Text>Худалдан авах бүтээгдэхүүний жагсаалт</Text>
-                        <Text>2023.04.01 10:00</Text>
+                        <Text style = {styles.memoListItemTitle}>Худалдан авах бүтээгдэхүүний жагсаалт</Text>
+                        <Text style = {styles.memoListItemDate}>2023.04.01 10:00</Text>
                     </View>
                     <View>
                         <Text>X</Text>
                     </View>
                 </View>
 
-                <View>
+                <View style = {styles.memoListItem}>
                     <View>
-                        <Text>Худалдан авах бүтээгдэхүүний жагсаалт</Text>
-                        <Text>2023.04.01 10:00</Text>
+                        <Text style = {styles.memoListItemTitle}>Худалдан авах бүтээгдэхүүний жагсаалт</Text>
+                        <Text style = {styles.memoListItemDate}>2023.04.01 10:00</Text>
                     </View>
                     <View>
                         <Text>X</Text>
                     </View>
                 </View>
 
-                <View>
+                <View style = {styles.memoListItem}>
                     <View>
-                        <Text>Худалдан авах бүтээгдэхүүний жагсаалт</Text>
-                        <Text>2023.04.01 10:00</Text>
+                        <Text style = {styles.memoListItemTitle}>Худалдан авах бүтээгдэхүүний жагсаалт</Text>
+                        <Text style = {styles.memoListItemDate}>2023.04.01 10:00</Text>
                     </View>
                     <View>
                         <Text>X</Text>
@@ -81,6 +81,25 @@ const styles = StyleSheet.create({
         fontSize: 16,
         color: 'rgba(255, 255, 255, 0.7)',
         
+    },
+    memoListItem:{
+        backgroundColor: '#ffffff',
+        flexDirection: 'row',
+        justifyContent: 'space-between',
+        paddingVertical: 16,
+        paddingHorizontal: 19,
+        alignItems: 'center',
+        borderBottomWidth: 1,
+        borderColor: 'rgba(0, 0, 0, 0.15)'
+    },
+    memoListItemTitle:{
+        fontSize: 16,
+        lineHeight: 32,
+    },
+    memoListItemDate:{
+        fontSize: 12,
+        lineHeight: 16,
+        color: '#848484'
     }
 })
 
