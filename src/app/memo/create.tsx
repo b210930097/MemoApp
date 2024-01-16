@@ -36,6 +36,7 @@ const Create = (): JSX.Element =>{
                     multiline style = {styles.input} 
                     value={bodyText}
                     onChangeText={(text) => { setBodyText(text) }}
+                    autoFocus
                 />
             </View>
             <CircleButton onPress={()=>{ handlePress(bodyText) }}>
