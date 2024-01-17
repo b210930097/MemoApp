@@ -12,7 +12,7 @@ import { db, auth } from '../../config'
 const handlePress = (): void => {
     router.push('/memo/create')
 }
-const Index = (): JSX.Element =>{
+const List = (): JSX.Element =>{
     const navigation = useNavigation()
     useEffect(() =>{
         navigation.setOptions({
@@ -25,10 +25,10 @@ const Index = (): JSX.Element =>{
         const q = query(ref, orderBy('updatedAt', 'desc'))
         const unsubscribe = onSnapshot(q, (snapshot) => {
             snapshot.forEach((doc) => {
-                console.log('memo', doc.id)
+                console.log('memo', doc.data())
             })
         })
-    return unsubscribe
+        return unsubscribe
     }, [])
     return(
         <View style = {styles.container}>
@@ -59,4 +59,4 @@ const styles = StyleSheet.create({
     }
 })
 
-export default Index
+export default List
