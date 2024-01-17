@@ -1,7 +1,7 @@
 import {View, Text, ScrollView, StyleSheet} from 'react-native'
 import {router, useNavigation} from 'expo-router'
 import { useEffect } from 'react'
-import { collection, onSnapshot, query } from 'firebase/firestore'
+import { collection, onSnapshot, query, orderBy } from 'firebase/firestore'
 
 import MemoListItem from '../../components/MemoListItem'
 import CircleButton from '../../components/CircleButton'
@@ -18,17 +18,18 @@ const Index = (): JSX.Element =>{
         navigation.setOptions({
             headerRight: () => { return <LogOutButton/> }
         })
-    },[])
+    }, [])
     useEffect(() => {
         if (auth.currentUser === null) {return}
         const ref = collection(db, `users/${auth.currentUser.uid}/memos`)
-        const q = query(ref)
-        onSnapshot(q, (snapshot) => {
-            snapshot.forEach((doc) =>{
+        const q = query(ref, orderBy('updatedAt', 'desc'))
+        const unsubscribe = onSnapshot(q, (snapshot) => {
+            snapshot.forEach((doc) => {
                 console.log('memo', doc.id)
             })
         })
-    },[])
+    return unsubscribe
+    }, [])
     return(
         <View style = {styles.container}>
 
