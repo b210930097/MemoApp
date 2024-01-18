@@ -11,7 +11,7 @@ const MemoListItem = (props: Props): JSX.Element | null =>{
     const {memo} = props
     const { bodyText, updateAt } = memo
     if (bodyText === null || updateAt === null){ return null }
-    const dateString  = updateAt.toDate().toString()
+    const dateString  = updateAt.toDate().toLocaleString()
     return(
         <Link href='memo/detail' asChild>
             <TouchableOpacity style = {styles.memoListItem}>

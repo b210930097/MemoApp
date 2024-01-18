@@ -1,4 +1,4 @@
-import {View, Text, ScrollView, StyleSheet} from 'react-native'
+import {View, ScrollView, StyleSheet, FlatList} from 'react-native'
 import {router, useNavigation} from 'expo-router'
 import { useEffect, useState } from 'react'
 import { collection, onSnapshot, query, orderBy } from 'firebase/firestore'
@@ -29,11 +29,11 @@ const List = (): JSX.Element =>{
             const remoteMemos: Memo[] = []
             snapshot.forEach((doc) => {
                 console.log('memo', doc.data())
-                const { bodyText, updatedAt} = doc.data()
+                const { bodyText, updateAt} = doc.data()
                 remoteMemos.push({
                     id: doc.id,
                     bodyText,
-                    updatedAt
+                    updateAt
                 })
             })
             setMemos(remoteMemos)
@@ -43,9 +43,10 @@ const List = (): JSX.Element =>{
     return(
         <View style = {styles.container}>
 
-            <View>
-                {memos.map((memo) => <MemoListItem memo ={memo}/>)}
-            </View>
+            <FlatList 
+                data={memos}
+                renderItem={({item}) => <MemoListItem memo ={item}/>}
+            />
 
             <CircleButton onPress={handlePress}>
                 <Icon name='plus' size={40} color='#ffffff'/>
