@@ -14,7 +14,7 @@ const handlePress = (): void => {
     router.push('/memo/create')
 }
 const List = (): JSX.Element =>{
-    const [memos, setMemos] = useState<Memo[]>()
+    const [memos, setMemos] = useState<Memo[]>([])
     const navigation = useNavigation()
     useEffect(() =>{
         navigation.setOptions({
@@ -24,7 +24,7 @@ const List = (): JSX.Element =>{
     useEffect(() => {
         if (auth.currentUser === null) {return}
         const ref = collection(db, `users/${auth.currentUser.uid}/memos`)
-        const q = query(ref, orderBy('updatedAt', 'desc'))
+        const q = query(ref, orderBy('updateAt', 'desc'))
         const unsubscribe = onSnapshot(q, (snapshot) => {
             const remoteMemos: Memo[] = []
             snapshot.forEach((doc) => {
@@ -36,22 +36,16 @@ const List = (): JSX.Element =>{
                     updatedAt
                 })
             })
-            return(remoteMemos)
+            setMemos(remoteMemos)
         })
         return unsubscribe
     }, [])
     return(
         <View style = {styles.container}>
 
-            <ScrollView>
-
-                <MemoListItem />
-
-                <MemoListItem />
-
-                <MemoListItem />
-
-            </ScrollView>
+            <View>
+                {memos.map((memo) => <MemoListItem memo ={memo}/>)}
+            </View>
 
             <CircleButton onPress={handlePress}>
                 <Icon name='plus' size={40} color='#ffffff'/>

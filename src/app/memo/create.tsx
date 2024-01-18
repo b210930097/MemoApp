@@ -13,7 +13,7 @@ import { db, auth} from '../../config'
 const handlePress = (bodyText: string): void => {
     if(auth.currentUser === null) { return }
     const ref = collection(db, `users/${auth.currentUser.uid}/memos`)
-    addDoc(collection(db, 'memos'),{
+    addDoc(ref,{
         bodyText,
         updateAt: Timestamp.fromDate(new Date())
     })

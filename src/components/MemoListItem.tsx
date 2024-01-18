@@ -2,15 +2,23 @@ import {View, Text, StyleSheet, TouchableOpacity} from 'react-native'
 import {Link} from 'expo-router'
 
 import Icon from './icon'
+import { Memo } from '../../types/memo'
 
-const MemoListItem = (): JSX.Element =>{
+interface Props{
+    memo : Memo
+}
+const MemoListItem = (props: Props): JSX.Element | null =>{
+    const {memo} = props
+    const { bodyText, updateAt } = memo
+    if (bodyText === null || updateAt === null){ return null }
+    const dateString  = updateAt.toDate().toString()
     return(
         <Link href='memo/detail' asChild>
             <TouchableOpacity style = {styles.memoListItem}>
 
                 <View>
-                    <Text style = {styles.memoListItemTitle}>Худалдан авах бүтээгдэхүүний жагсаалт</Text>
-                    <Text style = {styles.memoListItemDate}>2023.04.01 10:00</Text>
+                    <Text numberOfLines={1} style = {styles.memoListItemTitle}>{bodyText}</Text>
+                    <Text style = {styles.memoListItemDate}>{dateString}</Text>
                 </View>
                 
                 <TouchableOpacity>
